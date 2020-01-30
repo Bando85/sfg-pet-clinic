@@ -37,9 +37,5 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
         super.deleteById(id);
     }
 
-    @Override
-    public Pet findByLastName(String lastName) {
-        return null;
-    }
 }
 
