@@ -14,7 +14,7 @@ import java.util.Set;
  */
 
 @Service
-@Profile("srpingdatajpa")
+@Profile("springdatajpa")
 public class PetTypeSDJpaService implements PetTypeService {
 
     private final PetTypeRepository petTypeRepository;
