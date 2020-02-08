@@ -11,6 +11,7 @@ import java.time.LocalDate;
  * Created by Andras Laczo 2019. 12. 18.
  */
 
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -68,6 +69,8 @@ public class DataLoader implements CommandLineRunner {
         owner1.setAddress("123 Brickerel");
         owner1.setCity("Miami");
         owner1.setTelephone("12313241234");
+
+        ownerService.save(Owner.builder().firstName("adsfadf").address("adfadsfadsf").build());
 
         Pet mikesPet = new Pet();
         mikesPet.setPetType(savedDogPetType);
