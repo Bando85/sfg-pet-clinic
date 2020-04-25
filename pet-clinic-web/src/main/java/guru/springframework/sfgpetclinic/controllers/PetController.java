@@ -53,7 +53,6 @@ public class PetController {
     @GetMapping("/pets/new")
     public String initCreationForm(Owner owner, Model model) {
         Pet pet = new Pet();
-        owner.getPets().add(pet);
         pet.setOwner(owner);
         model.addAttribute("pet", pet);
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
@@ -64,13 +63,14 @@ public class PetController {
         if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null) {
             result.rejectValue("name", "duplicate", "already exists");
         }
-        owner.getPets().add(pet);
-        pet.setOwner(owner);
+
         if (result.hasErrors()) {
             model.addAttribute("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         }
         else {
+            owner.getPets().add(pet);
+            pet.setOwner(owner); //TODO somehow the owner is null, needs revise
             petService.save(pet);
             return "redirect:/owners/" + owner.getId();
         }
@@ -90,7 +90,8 @@ public class PetController {
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         }
         else {
-            owner.getPets().add(pet);
+            //owner.getPets().add(pet);
+            //pet.setOwner(owner); //TODO somehow the owner is null, needs revise
             petService.save(pet);
             return "redirect:/owners/" + owner.getId();
         }
